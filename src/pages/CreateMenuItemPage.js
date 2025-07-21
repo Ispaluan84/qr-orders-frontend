@@ -16,7 +16,7 @@ export default function CreateMenuItemPage() {
 
 
     useEffect(() => {
-        fetch(`http://localhost:5000/api/restaurants/${slug}`)
+        fetch(`${process.env.REACT_APP_API_URL}/api/restaurants/${slug}`)
         .then(res => res.json())
         .then(data => setRestaurantId(data._id))
         .catch(() => alert('No se pudo cargar el restaurante'));
@@ -38,7 +38,7 @@ export default function CreateMenuItemPage() {
                 restaurant: restaurantId
             };
 
-            const res = await fetch('http://localhost:5000/api/menu', {
+            const res = await fetch(`${process.env.REACT_APP_API_URL}/api/menu`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(body)

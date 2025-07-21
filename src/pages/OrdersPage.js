@@ -6,7 +6,7 @@ export default function OrdersPage() {
   const [orders, setOrders] = useState([]);
 
   const fetchOrders = () => {
-    fetch(`http://localhost:5000/api/orders/${id}`)
+    fetch(`${process.env.REACT_APP_API_URL}/api/orders/${id}`)
       .then(res => res.json())
       .then(data => setOrders(data))
       .catch(err => console.error(err));
@@ -18,7 +18,7 @@ export default function OrdersPage() {
 
   const handleStatusChange = async (orderId, newStatus) => {
     try {
-      const res = await fetch(`http://localhost:5000/api/orders/${orderId}/status`, {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/api/orders/${orderId}/status`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status: newStatus })
@@ -26,7 +26,7 @@ export default function OrdersPage() {
 
       if (!res.ok) throw new Error('Error al actualizar el estado');
 
-      fetchOrders(); // recargar pedidos después del cambio
+      fetchOrders();
     } catch (error) {
       alert(error.message);
     }

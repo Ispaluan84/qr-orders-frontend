@@ -7,11 +7,11 @@ export default function MenuPage() {
     const [ menuItems, setMenuItems ] = useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/api/restaurants/${slug}`)
+        fetch(`${process.env.REACT_APP_API_URL}/api/restaurants/${slug}`)
         .then(res => res.json())
         .then((data) => {
             setRestaurant(data);
-            return fetch(`http://localhost:5000/api/menu/restaurant/${data._id}`);
+            return fetch(`${process.env.REACT_APP_API_URL}/api/menu/restaurant/${data._id}`);
         })
         .then(res => res.json())
         .then(menu => setMenuItems(menu))

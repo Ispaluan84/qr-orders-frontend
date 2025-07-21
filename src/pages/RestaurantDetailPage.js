@@ -6,7 +6,7 @@ export default function RestaurantDetailPage() {
     const [ restaurant, setRestaurant ] = useState(null);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/api/restaurants/${slug}`)
+        fetch(`${process.env.REACT_APP_API_URL}/api/restaurants/${slug}`)
         .then(res => res.json())
         .then(data => setRestaurant(data))
         .catch(() => alert("Error al cargar restaurante"));

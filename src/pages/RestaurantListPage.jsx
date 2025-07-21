@@ -8,7 +8,7 @@ export default function RestaurantListPage() {
     useEffect(() => {
         const fetchRestaurants = async () => {
             try {
-                const res = await fetch('http://localhost:5000/api/restaurants');
+                const res = await fetch(`${process.env.REACT_APP_API_URL}/api/restaurants`);
                 const data = await res.json();
                 setRestaurants(data);
             } catch (error) {

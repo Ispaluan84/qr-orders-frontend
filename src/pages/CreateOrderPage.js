@@ -9,11 +9,11 @@ export default function CreateOrderPage() {
   const [tableNumber, setTableNumber] = useState(1);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/restaurants/${slug}`)
+    fetch(`${process.env.REACT_APP_API_URL}/api/restaurants/${slug}`)
       .then(res => res.json())
       .then(data => {
         setRestaurant(data);
-        return fetch(`http://localhost:5000/api/menu/restaurant/${data._id}`);
+        return fetch(`${process.env.REACT_APP_API_URL}/api/menu/restaurant/${data._id}`);
       })
       .then(res => res.json())
       .then(menu => setMenuItems(menu))
@@ -48,7 +48,7 @@ export default function CreateOrderPage() {
     };
 
     try {
-      const res = await fetch("http://localhost:5000/api/orders", {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/api/orders`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body)
