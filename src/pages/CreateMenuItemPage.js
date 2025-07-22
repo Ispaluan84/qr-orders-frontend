@@ -5,22 +5,27 @@ export default function CreateMenuItemPage() {
     const { slug } = useParams();
     const navigate = useNavigate();
     const [restaurantId, setRestaurantId] = useState(null);
+    const [categories,setCategories] = useState([]);
 
     const [formData, setFormData] = useState({
         name: '',
         description: '',
         price: '',
-        category: 'principal',
+        category: '',
         imageUrl: ''
     });
 
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_API_URL}/api/restaurants/${slug}`)
-        .then(res => res.json())
-        .then(data => setRestaurantId(data._id))
-        .catch(() => alert('No se pudo cargar el restaurante'));
-    }, [ slug ]);
+    fetch(`${process.env.REACT_APP_API_URL}/api/restaurants/${slug}`)
+      .then(res => res.json())
+      .then(data => {
+        setRestaurantId(data._id);
+        setCategories(data.categories || []);
+        setFormData(prev => ({ ...prev, category: data.categories?.[0] || '' }));
+      })
+      .catch(() => alert('No se pudo cargar el restaurante'));
+  }, [slug]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
