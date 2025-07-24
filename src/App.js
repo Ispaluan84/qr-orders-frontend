@@ -14,6 +14,7 @@ function App() {
     <Router>
       <Routes>
         
+        <Route path="/public/:slug" element={<PublicMenuPage />} />
         <Route path="/" element={<RestaurantListPage />} />
         <Route path="/restaurant/create" element={ <CreateRestaurantPage /> } />
         <Route path="/restaurant/:slug" element={ <RestaurantDetailPage />} />
@@ -21,7 +22,6 @@ function App() {
         <Route path="/restaurant/:slug/menu" element={ <MenuPage /> } />
         <Route path="/restaurant/:slug/order" element={ <CreateOrderPage /> } />
         <Route path="/restaurant/:id/orders" element={ <OrdersPage /> } />
-        <Route path="/r/:slug" element={<PublicMenuPage />} />
       </Routes>
     </Router>
   );
