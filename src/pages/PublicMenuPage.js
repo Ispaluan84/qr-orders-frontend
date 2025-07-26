@@ -139,7 +139,36 @@ export default function PublicMenuPage() {
         <p className="text-red-500 text-sm">{formErrors.items}</p>
       )}
 
-      {/* Botón de envío */}
+      {Object.entries(quantities).some(([_, qty]) => qty > 0) && (
+  <div className="mt-8 border-t pt-4">
+    <h3 className="text-lg font-semibold mb-3 text-gray-800">Resumen del pedido</h3>
+    <ul className="space-y-2">
+      {Object.entries(quantities).map(([id, qty]) => {
+        if (qty > 0) {
+          const item = menuItems.find((item) => item._id === id);
+          if (!item) return null;
+          return (
+            <li key={id} className="flex justify-between text-sm">
+              <span>{item.name} x {qty}</span>
+              <span>{(item.price * qty).toFixed(2)}€</span>
+            </li>
+          );
+        }
+        return null;
+      })}
+    </ul>
+    <div className="flex justify-between font-bold border-t mt-2 pt-2">
+      <span>Total:</span>
+      <span>
+        {Object.entries(quantities).reduce((total, [id, qty]) => {
+          const item = menuItems.find((item) => item._id === id);
+          return item ? total + item.price * qty : total;
+        }, 0).toFixed(2)}€
+      </span>
+    </div>
+  </div>
+)}
+
       <div className="text-center">
         <button
           type="submit"
