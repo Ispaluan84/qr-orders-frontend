@@ -37,6 +37,8 @@ export default function PublicMenuPage() {
         quantity: qty
       }));
 
+      const newErrors = {};
+
     if (!tableNumber) {
       newErrors.tableNumber = "Debes ingresar número de mesa";
     }
