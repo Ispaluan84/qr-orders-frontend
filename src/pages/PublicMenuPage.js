@@ -80,7 +80,7 @@ export default function PublicMenuPage() {
   const groupedItems = menuItems.reduce((acc, item) => { 
     const cat = item.category || 'Otros';
     if(!acc[cat]) acc[cat] = [];
-    acc[category].push(item);
+    acc[cat].push(item);
     return acc;
   }, {});
 
