@@ -7,6 +7,7 @@ export default function PublicMenuPage() {
   const [menuItems, setMenuItems] = useState([]);
   const [quantities, setQuantities] = useState({});
   const [tableNumber, setTableNumber] = useState('');
+  const [formErrors, setFormErrors] = useState({});
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}/api/restaurants/${slug}`)
@@ -36,10 +37,20 @@ export default function PublicMenuPage() {
         quantity: qty
       }));
 
-    if (!tableNumber || items.length === 0) {
-      alert("Debes indicar número de mesa y seleccionar productos");
+    if (!tableNumber) {
+      newErrors.tableNumber = "Debes ingresar número de mesa";
+    }
+
+    if (items.length === 0) {
+      newErrors.items = "Debes seleccionar un producto";
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setFormErrors(newErrors)
       return;
     }
+
+    setFormErrors({});
 
     const body = {
       tableNumber: parseInt(tableNumber),
@@ -86,6 +97,9 @@ export default function PublicMenuPage() {
           onChange={(e) => setTableNumber(e.target.value)}
           required
         />
+        {formErrors.tableNumber && (
+          <p style={{ color: 'red', fontSize: '0.9rem'}}>{formErrors.tableNumber}</p>
+        )}
 
         {Object.entries(groupedItems).map(([category, items]) => (
           <div key={category} style={{ margin: '2rem 0' }}>
@@ -105,6 +119,10 @@ export default function PublicMenuPage() {
             ))}
           </div>
         ))}
+
+        {formErrors.item && (
+          <p style={{ color: 'red', fontSize: '0.9rem'}}>{formErrors.item}</p>
+        )}
 
         <button type="submit" style={{ marginTop: '1rem' }}>
           Enviar pedido
