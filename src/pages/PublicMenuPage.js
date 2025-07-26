@@ -77,59 +77,78 @@ export default function PublicMenuPage() {
     }
   };
 
-  if (!restaurant) return <p>Cargando menú...</p>;
-
   const groupedItems = menuItems.reduce((acc, item) => { 
-    const category = item.category || 'Otros';
-    if(!acc[category]) acc[category] = [];
+    const cat = item.category || 'Otros';
+    if(!acc[cat]) acc[cat] = [];
     acc[category].push(item);
     return acc;
   }, {});
 
-  return (
-    <div style={{ padding: '2rem' }}>
-      <h2>{restaurant.name}</h2>
-      <p>{restaurant.description}</p>
+ if (!restaurant) return <p style={{ padding: '2rem' }}>Cargando menú...</p>;
 
-      <form onSubmit={handleSubmit}>
-        <label>Número de mesa:</label>
+  
+ return (
+  <div className="max-w-4xl mx-auto px-4 py-6">
+    <h2 className="text-2xl font-bold mb-4 text-center">{restaurant.name}</h2>
+    <p className="text-gray-600 mb-6 text-center">{restaurant.description}</p>
+
+    <form onSubmit={handleSubmit} className="space-y-6">
+      {/* Número de mesa */}
+      <div>
+        <label className="block font-medium mb-1">Número de mesa:</label>
         <input
           type="number"
           value={tableNumber}
           onChange={(e) => setTableNumber(e.target.value)}
           required
+          className="border rounded px-3 py-2 w-full sm:w-1/2"
         />
         {formErrors.tableNumber && (
-          <p style={{ color: 'red', fontSize: '0.9rem'}}>{formErrors.tableNumber}</p>
+          <p className="text-red-500 text-sm mt-1">{formErrors.tableNumber}</p>
         )}
+      </div>
 
-        {Object.entries(groupedItems).map(([category, items]) => (
-          <div key={category} style={{ margin: '2rem 0' }}>
-            <h3>{category.toUpperCase()}</h3>
+      {/* Categorías y productos */}
+      {Object.entries(groupedItems).map(([category, items]) => (
+        <div key={category} className="mt-6">
+          <h3 className="text-xl font-semibold mb-3 text-blue-700">{category.toUpperCase()}</h3>
+          <div className="grid sm:grid-cols-2 gap-4">
             {items.map(item => (
-              <div key={item._id} style={{ margin: '0.5rem 0'}}>
-                <strong>{item.name}</strong> - {item.price}€
-                <div>
-                  <input
-                    type="number"
-                    min={0}
-                    value={quantities[item._id] || 0}
-                    onChange={(e) => handleQuantityChange(item._id, e.target.value)}
-                  />
+              <div
+                key={item._id}
+                className="flex justify-between items-center border rounded px-3 py-2 shadow-sm bg-white"
+              >
+                <div className="flex flex-col">
+                  <span className="font-semibold">{item.name}</span>
+                  <span className="text-sm text-gray-500">{item.price}€</span>
                 </div>
+                <input
+                  type="number"
+                  min={0}
+                  className="w-20 border rounded px-2 py-1 text-center"
+                  value={quantities[item._id] || 0}
+                  onChange={(e) => handleQuantityChange(item._id, e.target.value)}
+                />
               </div>
             ))}
           </div>
-        ))}
+        </div>
+      ))}
 
-        {formErrors.item && (
-          <p style={{ color: 'red', fontSize: '0.9rem'}}>{formErrors.item}</p>
-        )}
+      {formErrors.items && (
+        <p className="text-red-500 text-sm">{formErrors.items}</p>
+      )}
 
-        <button type="submit" style={{ marginTop: '1rem' }}>
+      {/* Botón de envío */}
+      <div className="text-center">
+        <button
+          type="submit"
+          className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded transition"
+        >
           Enviar pedido
         </button>
-      </form>
-    </div>
-  );
-}
+      </div>
+    </form>
+  </div>
+);
+} 
