@@ -66,6 +66,13 @@ export default function PublicMenuPage() {
 
   if (!restaurant) return <p>Cargando menú...</p>;
 
+  const groupedItems = menuItems.reduce((acc, item) => { 
+    const category = item.category || 'Otros';
+    if(!acc[category]) acc[category] = [];
+    acc[category].push(item);
+    return acc;
+  }, {});
+
   return (
     <div style={{ padding: '2rem' }}>
       <h2>{restaurant.name}</h2>
@@ -80,17 +87,22 @@ export default function PublicMenuPage() {
           required
         />
 
-        {menuItems.map(item => (
-          <div key={item._id} style={{ margin: '1rem 0' }}>
-            <strong>{item.name}</strong> - {item.price}€
-            <div>
-              <input
-                type="number"
-                min={0}
-                value={quantities[item._id] || 0}
-                onChange={(e) => handleQuantityChange(item._id, e.target.value)}
-              />
-            </div>
+        {Object.entries(groupedItems).map(([category, items]) => (
+          <div key={category} style={{ margin: '2rem 0' }}>
+            <h3>{category.toUpperCase()}</h3>
+            {items.map(item => (
+              <div key={item._id} style={{ margin: '0.5rem 0'}}>
+                <strong>{item.name}</strong> - {item.price}€
+                <div>
+                  <input
+                    type="number"
+                    min={0}
+                    value={quantities[item._id] || 0}
+                    onChange={(e) => handleQuantityChange(item._id, e.target.value)}
+                  />
+                </div>
+              </div>
+            ))}
           </div>
         ))}
 
