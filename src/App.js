@@ -1,15 +1,11 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import HomePage from './pages/HomePage';
-import CreateRestaurantPage from './pages/CreateRestaurantPage';
-import RestaurantListPage from './pages/RestaurantListPage';
-import RestaurantDetailPage from './pages/RestaurantDetailPage';
-import MenuPage from './pages/MenuPage.js';
-import CreateOrderPage from './pages/CreateOrderPage';
-import OrdersPage from './pages/OrdersPage';
-import CreateMenuItemPage from "./pages/CreateMenuItemPage.js";
 import PublicMenuPage from "./pages/PublicMenuPage.js";
 import LoginPage from "./pages/LoginPage.js";
 import AdminDashboardPage from "./pages/AdminDashboardPage.js";
+import MenuFormPage from "./pages/MenuFormPage.jsx";
+import OrdersPage from './pages/OrdersPage';
+import AdminMenuPage from "./pages/AdminMenuPage.jsx";
+
 
 function App() {
   return (
@@ -17,15 +13,11 @@ function App() {
       <Routes>
 
         <Route path="/admin/login" element={<LoginPage />} />
-        <Route path="/admin/:id" element={<AdminDashboardPage />} />
-        <Route path="/public/:slug" element={<PublicMenuPage />} />
-        <Route path="/" element={<RestaurantListPage />} />
-        <Route path="/restaurant/create" element={ <CreateRestaurantPage /> } />
-        <Route path="/restaurant/:slug" element={ <RestaurantDetailPage />} />
-        <Route path="/restaurant/:slug/menu/create" element={ <CreateMenuItemPage />} />
-        <Route path="/restaurant/:slug/menu" element={ <MenuPage /> } />
-        <Route path="/restaurant/:slug/order" element={ <CreateOrderPage /> } />
-        <Route path="/restaurant/:id/orders" element={ <OrdersPage /> } />
+        <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
+        <Route path="/admin/menu" element={<AdminMenuPage />} />
+        <Route path="admin/menu/create" element={ <MenuFormPage />} />
+        <Route path="admin/orders" element={ <OrdersPage /> } />
+        <Route path="/" element={<HomePage />} />
       </Routes>
     </Router>
   );
