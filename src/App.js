@@ -8,6 +8,7 @@ import CreateOrderPage from './pages/CreateOrderPage';
 import OrdersPage from './pages/OrdersPage';
 import CreateMenuItemPage from "./pages/CreateMenuItemPage.js";
 import PublicMenuPage from "./pages/PublicMenuPage.js";
+import LoginPage from "./pages/LoginPage.js";
 import AdminDashboardPage from "./pages/AdminDashboardPage.js";
 
 function App() {
