@@ -46,7 +46,7 @@ useEffect(() => {
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-bold">Gestión del Menú</h2>
         <Link 
-            to={`/admin/${Id}/menu/create`}
+            to={`/admin/${id}/menu/create`}
             className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
         >
           Añadir Plato
