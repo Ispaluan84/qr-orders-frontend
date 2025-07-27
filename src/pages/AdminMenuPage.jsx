@@ -1,17 +1,23 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 export default function AdminMenuPage() {
   const [menuItems, setMenuItems] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
+useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      navigate('/admin/login');
+      return;
+    }
+
     fetch(`${process.env.REACT_APP_API_URL}/api/menu`)
       .then(res => res.json())
       .then(data => setMenuItems(data))
       .catch(err => console.error('Error cargando el menú:', err))
       .finally(() => setLoading(false));
-  }, []);
+  }, [navigate]);
 
   const toggleAvailability = async (id) => {
     try {
@@ -37,9 +43,9 @@ export default function AdminMenuPage() {
     <div className="max-w-4xl mx-auto px-4 py-6">
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-bold">Gestión del Menú</h2>
-        <Link
-          to="/admin/menu/create"
-          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+        <Link 
+            to={`/admin/${Id}/menu/create`}
+            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
         >
           Añadir Plato
         </Link>
