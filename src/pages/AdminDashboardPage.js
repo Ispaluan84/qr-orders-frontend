@@ -5,7 +5,10 @@ export default function AdminDashboardPage() {
     const { id } = useParams();
     const navigate = useNavigate();
     const [ restaurant, setRestaurant] = useState(null);
-
+    const adminRestaurantId = localStorage.getItem('adminRestaurantId')
+   
+   
+   
     useEffect(() => {
         const token = localStorage.getItem('token');
 
@@ -26,7 +29,7 @@ export default function AdminDashboardPage() {
 
     const handleLogout = () => {
         localStorage.removeItem('token');
-        localStorage.removeItem(adminRestaurantId);
+        localStorage.removeItem('adminRestaurantId');
         navigate('/admin/login');
     };
 
