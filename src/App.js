@@ -13,7 +13,8 @@ function App() {
   return (
     <Router>
       <Routes>
-        
+
+        <Route path="/admin/login" element={<LoginPage />} />
         <Route path="/public/:slug" element={<PublicMenuPage />} />
         <Route path="/" element={<RestaurantListPage />} />
         <Route path="/restaurant/create" element={ <CreateRestaurantPage /> } />
