@@ -49,6 +49,14 @@ export default function AdminDashboardPage() {
           Ver / Editar Menú
         </Link>
 
+        
+        <Link
+          to={`/admin/${id}/menu/create`}
+          className="block bg-yellow-600 text-white px-4 py-2 rounded hover:bg-yellow-700 text-center"
+        >
+          Añadir Plato
+        </Link>
+
         <Link
           to={`/admin/${id}/orders`}
           className="block bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 text-center"

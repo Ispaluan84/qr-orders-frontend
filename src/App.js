@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage.js";
 import PublicMenuPage from "./pages/PublicMenuPage.js";
 import LoginPage from "./pages/LoginPage.js";
-import AdminDashboardPage from "./pages/AdminDashboardPage.js";
+import AdminDashboardPage from "./pages/AdminDashboardPage.jsx";
 import MenuFormPage from "./pages/MenuFormPage.jsx";
 import OrdersPage from './pages/OrdersPage';
 import AdminMenuPage from "./pages/AdminMenuPage.jsx";
