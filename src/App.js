@@ -8,6 +8,7 @@ import CreateOrderPage from './pages/CreateOrderPage';
 import OrdersPage from './pages/OrdersPage';
 import CreateMenuItemPage from "./pages/CreateMenuItemPage.js";
 import PublicMenuPage from "./pages/PublicMenuPage.js";
+import AdminDashboardPage from "./pages/AdminDashboardPage.js";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Routes>
 
         <Route path="/admin/login" element={<LoginPage />} />
+        <Route path="/admin/:id" element={<AdminDashboardPage />} />
         <Route path="/public/:slug" element={<PublicMenuPage />} />
         <Route path="/" element={<RestaurantListPage />} />
         <Route path="/restaurant/create" element={ <CreateRestaurantPage /> } />
