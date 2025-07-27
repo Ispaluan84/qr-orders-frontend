@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, useParams, Link } from 'react-router-dom';
 
 export default function AdminMenuPage() {
   const [menuItems, setMenuItems] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+  const {id} = useParams();
 
 useEffect(() => {
     const token = localStorage.getItem('token');
