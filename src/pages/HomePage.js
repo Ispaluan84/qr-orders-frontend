@@ -1,3 +1,7 @@
 export default function HomePage() {
-    return <h1>Listado de Restaurantes</h1>
+  return (
+    <div className="text-center mt-10">
+      <h1 className="text-2xl font-bold">Bienvenido al panel QR Orders</h1>
+    </div>
+  );
 }
