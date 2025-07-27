@@ -23,7 +23,7 @@ export default function LoginPage() {
 
       const data = await res.json();
       localStorage.setItem('token', data.token);
-      navigate('/admin');
+      navigate(`/admin/${data.admin.restaurant}`);
     } catch (err) {
       alert(err.message);
     }
