@@ -7,6 +7,8 @@ export default function PublicMenuPage() {
   const [quantities, setQuantities] = useState({});
   const [message, setMessage] = useState('')
   const [toast, setToast] = useState({ message: '', type: ''});
+  
+  
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}/api/menu`)
       .then(res => res.json())
@@ -16,6 +18,13 @@ export default function PublicMenuPage() {
         setMessage('Error al cargar el menú');
       })
   }, []);
+
+  const groupedMenu = menu.reduce((acc, item) => {
+  acc[item.category] = acc[item.category] || [];
+  acc[item.category].push(item);
+  return acc;
+}, {});
+
 
   const handleQuantityChange = (id, value) => {
     setQuantities(prev => ({
@@ -73,24 +82,26 @@ return (
         />
       </div>
 
-      {menu.map(item => (
-        <div key={item._id} className="border-b pb-2 mb-2">
-          <div className="flex justify-between items-center">
-            <div>
-              <h3 className="font-semibold text-lg">{item.name}</h3>
-              <p className="text-gray-700 text-sm">{item.description}</p>
-              <p className="text-green-600 font-bold">€{item.price}</p>
+      {Object.keys(groupedMenu).map(category => (
+        <div key={category} className="mb-6">
+          <h2 className="text-xl font-bold mb-2 capitalize">{category}</h2>
+          {groupedMenu[category].map(item => (
+            <div key={item._id} className="border-b pb-2 mb-2">
+              <div className="flex justify-between items-center">
+                <div>
+                  <h3 className="font-semibold text-lg">{item.name}</h3>
+                  <p className="text-gray-700 text-sm">{item.description}</p>
+                  <p className="text-green-600 font-bold">€{item.price}</p>
+                </div>
+                <input
+                  type="number"
+                  min={0}
+                  className="w-20 border rounded px-2 py-1 ml-4"
+                  value={quantities[item._id] || ''}
+                  onChange={(e) => handleQuantityChange(item._id, e.target.value)}/>
+              </div>
             </div>
-            <input
-              type="number"
-              min={0}
-              className="w-20 border rounded px-2 py-1 ml-4"
-              value={quantities[item._id] || ''}
-              onChange={(e) => handleQuantityChange(item._id, e.target.value)
-
-              }
-            />
-          </div>
+          ))}
         </div>
       ))}
 

@@ -18,7 +18,14 @@ useEffect(() => {
       .then(data => setMenuItems(data))
       .catch(err => console.error('Error cargando el menú:', err))
       .finally(() => setLoading(false));
-  }, [navigate]);
+}, [navigate]);
+
+const groupedMenu = menuItems.reduce((acc, item) => {
+  acc[item.category] = acc[item.category] || [];
+  acc[item.category].push(item);
+  return acc;
+}, {});
+
 
   const toggleAvailability = async (id) => {
     try {
@@ -75,41 +82,54 @@ useEffect(() => {
       {menuItems.length === 0 ? (
         <p>No hay platos en el menú.</p>
       ) : (
-        <ul className="space-y-4">
-          {menuItems.map(item => (
-            <li
-              key={item._id}
-              className="p-4 border rounded flex justify-between items-center">
-              <div>
-                <h3 className="text-lg font-semibold">{item.name}</h3>
-                <p className="text-gray-600">{item.category}</p>
-                <p className="text-green-600 font-bold">€{item.price}</p>
-                {!item.available && (
-                  <p className="text-red-500 text-sm">No disponible</p>
-                )}
-              </div>
-              <div className="flex gap-2">
-                <Link
-                  to={`/admin/menu/edit/${item._id}`}
-                  className="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600">
-                  Editar
-                </Link>
-                <button
-                  onClick={() => toggleAvailability(item._id)}
-                  className="bg-gray-200 px-3 py-1 rounded hover:bg-gray-300">
-                  {item.available ? 'Ocultar' : 'Mostrar'}
-                </button>
-                <button
-                  onClick={() => handleDelete(item._id)}
-                  className="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700">
-                  Eliminar
-                </button>
-              </div>
+        <div className="space-y-6">
+  {Object.keys(groupedMenu).map(category => (
+    <div key={category}>
+      <h3 className="text-xl font-bold mb-2 capitalize">{category}</h3>
+      <ul className="space-y-4">
+        {groupedMenu[category].map(item => (
+          <li
+            key={item._id}
+            className="p-4 border rounded flex justify-between items-center"
+          >
+            <div>
+              <h4 className="text-lg font-semibold">{item.name}</h4>
+              <p className="text-gray-600">{item.category}</p>
+              <p className="text-green-600 font-bold">€{item.price}</p>
+              {!item.available && (
+                <p className="text-red-500 text-sm">No disponible</p>
+              )}
+            </div>
 
-            </li>
-          ))}
-        </ul>
-      )}
+            <div className="flex space-x-2">
+              <button
+                onClick={() => navigate(`/admin/menu/edit/${item._id}`)}
+                className="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600"
+              >
+                Editar
+              </button>
+
+              <button
+                onClick={() => handleDelete(item._id)}
+                className="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700"
+              >
+                Eliminar
+              </button>
+
+              <button
+                onClick={() => toggleAvailability(item._id)}
+                className="bg-gray-200 px-3 py-1 rounded hover:bg-gray-300"
+              >
+                {item.available ? 'Ocultar' : 'Mostrar'}
+              </button>
+            </div>
+          </li>
+        ))}
+      </ul>
     </div>
-  );
+  ))}
+</div>
+)}
+</div>
+);
 }
