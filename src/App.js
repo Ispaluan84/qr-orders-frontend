@@ -1,10 +1,10 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import HomePage from "./pages/HomePage.js";
+import HomePage from "./pages/HomePage.jsx";
 import PublicMenuPage from "./pages/PublicMenuPage.js";
 import LoginPage from "./pages/LoginPage.js";
 import AdminDashboardPage from "./pages/AdminDashboardPage.jsx";
 import MenuFormPage from "./pages/MenuFormPage.jsx";
-import OrdersPage from './pages/OrdersPage';
+import OrdersPage from './pages/OrdersPage.jsx';
 import AdminMenuPage from "./pages/AdminMenuPage.jsx";
 import MenuEditPage from "./pages/MenuEditPage.jsx";
 
