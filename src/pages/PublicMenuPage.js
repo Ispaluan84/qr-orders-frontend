@@ -20,7 +20,7 @@ export default function PublicMenuPage() {
   const handleQuantityChange = (id, value) => {
     setQuantities(prev => ({
       ...prev,
-      [itemId]: parseInt(value, 10) || 0
+      [id]: parseInt(value, 10) || 0
     }));
   };
 
@@ -87,7 +87,7 @@ return (
               className="w-20 border rounded px-2 py-1 ml-4"
               value={quantities[item._id] || ''}
               onChange={(e) => handleQuantityChange(item._id, e.target.value)
-                
+
               }
             />
           </div>

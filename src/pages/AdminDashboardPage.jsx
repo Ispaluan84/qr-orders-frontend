@@ -14,12 +14,11 @@ export default function AdminDashboardPage() {
       return;
     }
 
-    fetch(`${process.env.REACT_APP_API_URL}/api/restaurant`), {
+    fetch(`${process.env.REACT_APP_API_URL}/api/restaurant`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
-
-    }
+    })
 
       .then(res => {
         if (!res.ok) throw new Error('No se pudo obtener el restaurante');
