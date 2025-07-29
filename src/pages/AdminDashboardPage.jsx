@@ -1,8 +1,8 @@
+import QRCodeGenerator from '../components/QRCodeGenerator';
 import { useEffect, useState } from 'react';
-import { useNavigate, useParams, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export default function AdminDashboardPage() {
-  const { id } = useParams();
   const navigate = useNavigate();
   const [restaurant, setRestaurant] = useState(null);
 
@@ -14,7 +14,13 @@ export default function AdminDashboardPage() {
       return;
     }
 
-    fetch(`${process.env.REACT_APP_API_URL}/api/restaurants/${id}`)
+    fetch(`${process.env.REACT_APP_API_URL}/api/restaurant`), {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+
+    }
+
       .then(res => {
         if (!res.ok) throw new Error('No se pudo obtener el restaurante');
         return res.json();
@@ -24,11 +30,10 @@ export default function AdminDashboardPage() {
         console.error(err);
         alert('Error al cargar restaurante');
       });
-  }, [id, navigate]);
+  }, [navigate]);
 
   const handleLogout = () => {
     localStorage.removeItem('token');
-    localStorage.removeItem('adminRestaurantId');
     navigate('/admin/login');
   };
 
@@ -42,32 +47,21 @@ export default function AdminDashboardPage() {
       <p className="text-gray-600 mb-6">{restaurant.description}</p>
 
       <div className="space-y-4">
-        <Link
-          to={`/admin/${id}/menu`}
-          className="block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-center"
-        >
+        <button
+          onClick={() => navigate('/admin/menu')}
+          className="block w-full bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-center">
           Ver / Editar Menú
-        </Link>
+        </button>
 
-        
-        <Link
-          to={`/admin/${id}/menu/create`}
-          className="block bg-yellow-600 text-white px-4 py-2 rounded hover:bg-yellow-700 text-center"
-        >
-          Añadir Plato
-        </Link>
-
-        <Link
-          to={`/admin/${id}/orders`}
-          className="block bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 text-center"
-        >
+        <button
+          onClick={() => navigate('/admin/orders')}
+          className="block w-full bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 text-center">
           Ver Pedidos
-        </Link>
+        </button>
 
         <button
           onClick={handleLogout}
-          className="block w-full bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
-        >
+          className="block w-full bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 text-center">
           Cerrar Sesión
         </button>
       </div>
