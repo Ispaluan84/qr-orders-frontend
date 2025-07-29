@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
-import { useNavigate, useParams, Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 export default function AdminMenuPage() {
   const [menuItems, setMenuItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-  const {id} = useParams();
 
 useEffect(() => {
     const token = localStorage.getItem('token');
@@ -39,6 +38,26 @@ useEffect(() => {
     }
   };
 
+  const handleDelete = async (id) => {
+    if (!window.confirm('¿Estás seguro de que deseas eliminar este plato?')) return;
+
+    try {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/api/menu/${id}`, {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      });
+
+      if (!res.ok) throw new Error('Error al eliminar el plato');
+
+      setMenuItems((prev) => prev.filter(item => item._id !== id));
+    } catch (err) {
+      alert('No se pudo eliminar el plato');
+      console.error(err);
+    }
+  };
+
   if (loading) return <p className="text-center mt-10">Cargando menú...</p>;
 
   return (
@@ -46,7 +65,7 @@ useEffect(() => {
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-bold">Gestión del Menú</h2>
         <Link 
-            to={`/admin/${id}/menu/create`}
+            to={`/admin/menu/create`}
             className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
         >
           Añadir Plato
@@ -60,8 +79,7 @@ useEffect(() => {
           {menuItems.map(item => (
             <li
               key={item._id}
-              className="p-4 border rounded flex justify-between items-center"
-            >
+              className="p-4 border rounded flex justify-between items-center">
               <div>
                 <h3 className="text-lg font-semibold">{item.name}</h3>
                 <p className="text-gray-600">{item.category}</p>
@@ -70,12 +88,24 @@ useEffect(() => {
                   <p className="text-red-500 text-sm">No disponible</p>
                 )}
               </div>
-              <button
-                onClick={() => toggleAvailability(item._id)}
-                className="bg-gray-200 px-3 py-1 rounded hover:bg-gray-300"
-              >
-                {item.available ? 'Ocultar' : 'Mostrar'}
-              </button>
+              <div className="flex gap-2">
+                <Link
+                  to={`/admin/menu/edit/${item._id}`}
+                  className="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600">
+                  Editar
+                </Link>
+                <button
+                  onClick={() => toggleAvailability(item._id)}
+                  className="bg-gray-200 px-3 py-1 rounded hover:bg-gray-300">
+                  {item.available ? 'Ocultar' : 'Mostrar'}
+                </button>
+                <button
+                  onClick={() => handleDelete(item._id)}
+                  className="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700">
+                  Eliminar
+                </button>
+              </div>
+
             </li>
           ))}
         </ul>
