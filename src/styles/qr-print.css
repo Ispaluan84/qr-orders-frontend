@@ -1,0 +1,53 @@
+.qr-print-wrapper {
+  padding: 2rem;
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.qr-print-title {
+  font-size: 1.75rem;
+  margin-bottom: 2rem;
+}
+
+.qr-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.qr-card {
+  border: 1px solid #ccc;
+  padding: 1rem;
+  border-radius: 8px;
+  width: 200px;
+  background-color: white;
+}
+
+.qr-card-label {
+  font-weight: bold;
+  margin-top: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.qr-card-url {
+  font-size: 0.75rem;
+  word-break: break-word;
+  color: #555;
+  margin-top: 0.25rem;
+}
+
+@media print {
+  .qr-print-wrapper {
+    padding: 0;
+  }
+
+  .qr-grid {
+    gap: 1rem;
+  }
+
+  .qr-card {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+}

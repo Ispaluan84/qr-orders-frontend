@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import QRCodePrintPage from "./pages/QRCodePrintPage.jsx";
 import HomePage from "./pages/HomePage.jsx";
 import PublicMenuPage from "./pages/PublicMenuPage.js";
 import LoginPage from "./pages/LoginPage.js";
@@ -13,6 +14,7 @@ function App() {
     <Router>
       <Routes>
 
+        <Route path="/admin/qrs" element={<QRCodePrintPage />} />
         <Route path="/" element={<HomePage />} />
         <Route path="/menu" element={<PublicMenuPage />} />
 
