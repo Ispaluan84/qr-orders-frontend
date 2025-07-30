@@ -51,65 +51,25 @@ export default function MenuFormPage() {
     }
   };
 
-  return (
-    <div className="max-w-xl mx-auto p-6">
-      <h2 className="text-2xl font-bold mb-4">Nuevo Plato</h2>
-      {error && <p className="text-red-600 mb-2">{error}</p>}
+return (
+    <div className="container">
+      <h2 className="section-title">Nuevo Plato</h2>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
 
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <input
-          name="name"
-          type="text"
-          placeholder="Nombre del plato"
-          value={formData.name}
-          onChange={handleChange}
-          required
-          className="w-full border px-3 py-2 rounded"
-        />
-        <textarea
-          name="description"
-          placeholder="Descripción"
-          value={formData.description}
-          onChange={handleChange}
-          className="w-full border px-3 py-2 rounded"
-        />
-        <input
-          name="price"
-          type="number"
-          step="0.01"
-          placeholder="Precio"
-          value={formData.price}
-          onChange={handleChange}
-          required
-          className="w-full border px-3 py-2 rounded"
-        />
-        <select
-          name="category"
-          value={formData.category}
-          onChange={handleChange}
-          className="w-full border px-3 py-2 rounded"
-        >
+      <form onSubmit={handleSubmit}>
+        <input className="input" name="name" type="text" placeholder="Nombre del plato" value={formData.name} onChange={handleChange} required />
+        <textarea className="input" name="description" placeholder="Descripción" value={formData.description} onChange={handleChange} />
+        <input className="input" name="price" type="number" step="0.01" placeholder="Precio" value={formData.price} onChange={handleChange} required />
+        <select className="input" name="category" value={formData.category} onChange={handleChange}>
           <option value="entrante">Entrante</option>
           <option value="principal">Principal</option>
           <option value="postre">Postre</option>
           <option value="bebida">Bebida</option>
         </select>
-        <input
-          name="imageUrl"
-          type="text"
-          placeholder="URL de imagen (opcional)"
-          value={formData.imageUrl}
-          onChange={handleChange}
-          className="w-full border px-3 py-2 rounded"
-        />
-
-        <button
-          type="submit"
-          className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700"
-        >
-          Guardar Plato
-        </button>
+        <input className="input" name="imageUrl" type="text" placeholder="URL de imagen (opcional)" value={formData.imageUrl} onChange={handleChange} />
+        <button className="btn" type="submit">Guardar Plato</button>
       </form>
     </div>
   );
 }
+         
