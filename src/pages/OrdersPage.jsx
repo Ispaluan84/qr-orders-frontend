@@ -60,11 +60,13 @@ export default function OrdersPage() {
           <p className="order-info"><strong>Estado:</strong> {order.status}</p>
 
           <ul className="order-items">
-            {order.items.map((item) => (
-              <li key={item.menuItem._id}>
-                {item.menuItem.name} × {item.quantity}
-              </li>
-            ))}
+            {order.items.map((item, i) => (
+             <li key={i}>
+                {item.menuItem?.name
+                ? `${item.menuItem.name} × ${item.quantity}`
+                     : 'Plato eliminado'}
+            </li>
+          ))}
           </ul>
 
           <select
