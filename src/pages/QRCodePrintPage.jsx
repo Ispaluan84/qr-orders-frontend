@@ -1,5 +1,5 @@
 import { QRCodeCanvas } from "qrcode.react";
-import "./qr-print.css"; 
+import "../styles/qr-print.css"; 
 
 export default function QRCodePrintPage() {
   const baseUrl = "https://qr-orders-frontend.onrender.com/menu";

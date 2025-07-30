@@ -71,7 +71,7 @@ const groupedMenu = menuItems.reduce((acc, item) => {
 <div className="menu-container">
   <div className="menu-header">
     <h2 className="menu-title">Gestión del Menú</h2>
-    <Link to={`/admin/${id}/menu/create`} className="menu-button">
+    <Link to={`/admin/menu/create`} className="menu-button">
       Añadir Plato
     </Link>
   </div>
