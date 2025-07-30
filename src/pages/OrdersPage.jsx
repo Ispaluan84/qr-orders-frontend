@@ -59,15 +59,26 @@ export default function OrdersPage() {
           <p className="order-info"><strong>Mesa:</strong> {order.tableNumber}</p>
           <p className="order-info"><strong>Estado:</strong> {order.status}</p>
 
-          <ul className="order-items">
-            {order.items.map((item, i) => (
-             <li key={i}>
-                {item.menuItem?.name
-                ? `${item.menuItem.name} × ${item.quantity}`
-                     : 'Plato eliminado'}
-            </li>
-          ))}
-          </ul>
+        <ul className="mb-4 space-y-1">
+           {order.items.map((item, index) => {
+            const menuItem = item.menuItem;
+
+              if (!menuItem) {
+              return (
+              <li key={index} style={{ color: 'gray' }}>
+               (Producto eliminado)
+              </li>
+                );
+                }
+
+              return (
+              <li key={menuItem._id}>
+              {menuItem.name} × {item.quantity}
+              </li>
+               );
+               })}
+              </ul>
+
 
           <select
             value={order.status}
