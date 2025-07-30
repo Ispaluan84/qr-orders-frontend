@@ -47,40 +47,41 @@ export default function OrdersPage() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto py-8 px-4">
-      <h2 className="text-2xl font-bold mb-6">Pedidos Recibidos</h2>
+    <div className="orders-page-container">
+  <h2 className="orders-page-title">Pedidos Recibidos</h2>
 
-      {orders.length === 0 ? (
-        <p>No hay pedidos por el momento.</p>
-      ) : (
-        <ul className="space-y-4">
-          {orders.map(order => (
-            <li key={order._id} className="border p-4 rounded shadow">
-              <p className="mb-2"><strong>Mesa:</strong> {order.tableNumber}</p>
-              <p className="mb-2"><strong>Estado:</strong> {order.status}</p>
+  {orders.length === 0 ? (
+    <p>No hay pedidos por el momento.</p>
+  ) : (
+    <ul className="orders-list">
+      {orders.map((order) => (
+        <li key={order._id} className="order-card">
+          <p className="order-info"><strong>Mesa:</strong> {order.tableNumber}</p>
+          <p className="order-info"><strong>Estado:</strong> {order.status}</p>
 
-              <ul className="mb-4 space-y-1">
-                {order.items.map(item => (
-                  <li key={item.menuItem._id}>
-                    {item.menuItem.name} × {item.quantity}
-                  </li>
-                ))}
-              </ul>
+          <ul className="order-items">
+            {order.items.map((item) => (
+              <li key={item.menuItem._id}>
+                {item.menuItem.name} × {item.quantity}
+              </li>
+            ))}
+          </ul>
 
-              <select
-                value={order.status}
-                onChange={(e) => handleStatusChange(order._id, e.target.value)}
-                className="border rounded px-3 py-1"
-              >
-                <option value="pendiente">Pendiente</option>
-                <option value="preparando">Preparando</option>
-                <option value="listo">Listo</option>
-                <option value="entregado">Entregado</option>
-              </select>
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
+          <select
+            value={order.status}
+            onChange={(e) => handleStatusChange(order._id, e.target.value)}
+            className="order-select"
+          >
+            <option value="pendiente">Pendiente</option>
+            <option value="preparando">Preparando</option>
+            <option value="listo">Listo</option>
+            <option value="entregado">Entregado</option>
+          </select>
+        </li>
+      ))}
+    </ul>
+  )}
+</div>
+
   );
 }

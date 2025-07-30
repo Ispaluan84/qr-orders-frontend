@@ -30,34 +30,32 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-10 p-4 border rounded">
-      <h2 className="text-xl font-semibold mb-4">Acceso Administrador</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <input
-          type="email"
-          name="email"
-          placeholder="Correo electrónico"
-          value={formData.email}
-          onChange={handleChange}
-          className="w-full border px-3 py-2 rounded"
-          required
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Contraseña"
-          value={formData.password}
-          onChange={handleChange}
-          className="w-full border px-3 py-2 rounded"
-          required
-        />
-        <button
-          type="submit"
-          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-        >
-          Iniciar sesión
-        </button>
-      </form>
-    </div>
+    <div className="admin-login-container">
+  <h2 className="admin-login-title">Acceso Administrador</h2>
+  <form onSubmit={handleSubmit} className="admin-login-form">
+    <input
+      type="email"
+      name="email"
+      placeholder="Correo electrónico"
+      value={formData.email}
+      onChange={handleChange}
+      className="admin-login-input"
+      required
+    />
+    <input
+      type="password"
+      name="password"
+      placeholder="Contraseña"
+      value={formData.password}
+      onChange={handleChange}
+      className="admin-login-input"
+      required
+    />
+    <button type="submit" className="admin-login-button">
+      Iniciar sesión
+    </button>
+  </form>
+</div>
+
   );
 }

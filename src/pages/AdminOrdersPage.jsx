@@ -24,29 +24,32 @@ export default function AdminOrdersPage() {
     if(loading) return <p className="text-center mt-10">Cargando pedidos...</p>
 
     return(
-        <div className="max-w-4xl mx-auto px-4 py-6">
-      <h2 className="text-2xl font-bold mb-6">Pedidos Recibidos</h2>
+      <div className="orders-container">
+  <h2 className="orders-title">Pedidos Recibidos</h2>
 
-      {orders.length === 0 ? (
-        <p>No hay pedidos todavía.</p>
-      ) : (
-        <ul className="space-y-4">
-          {orders.map(order => (
-            <li key={order._id} className="border p-4 rounded">
-              <p className="font-semibold">Mesa {order.tableNumber}</p>
-              <p className="text-sm text-gray-500">Fecha: {new Date(order.createdAt).toLocaleString()}</p>
-              <ul className="mt-2 space-y-1">
-                {order.items.map((item, i) => (
-                  <li key={i}>
-                    • {item.menuItem.name} × {item.quantity}
-                  </li>
-                ))}
-              </ul>
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
+  {orders.length === 0 ? (
+    <p>No hay pedidos todavía.</p>
+  ) : (
+    <ul className="orders-list">
+      {orders.map((order) => (
+        <li key={order._id} className="order-card">
+          <p className="order-table">Mesa {order.tableNumber}</p>
+          <p className="order-date">
+            Fecha: {new Date(order.createdAt).toLocaleString()}
+          </p>
+          <ul className="order-items">
+            {order.items.map((item, i) => (
+              <li key={i}>
+                • {item.menuItem.name} × {item.quantity}
+              </li>
+            ))}
+          </ul>
+        </li>
+      ))}
+    </ul>
+  )}
+</div>
+
     )
 
 

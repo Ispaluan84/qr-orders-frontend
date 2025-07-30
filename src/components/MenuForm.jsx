@@ -30,61 +30,59 @@ export default function MenuForm({ initialData = {}, onSubmit, submitLabel = 'Gu
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      {error && <p className="text-red-600">{error}</p>}
+    <form onSubmit={handleSubmit} className="dish-form">
+  {error && <p className="form-error">{error}</p>}
 
-      <input
-        name="name"
-        type="text"
-        placeholder="Nombre del plato"
-        value={formData.name}
-        onChange={handleChange}
-        required
-        className="w-full border px-3 py-2 rounded"
-      />
-      <textarea
-        name="description"
-        placeholder="Descripción"
-        value={formData.description}
-        onChange={handleChange}
-        className="w-full border px-3 py-2 rounded"
-      />
-      <input
-        name="price"
-        type="number"
-        step="0.01"
-        placeholder="Precio"
-        value={formData.price}
-        onChange={handleChange}
-        required
-        className="w-full border px-3 py-2 rounded"
-      />
-      <select
-        name="category"
-        value={formData.category}
-        onChange={handleChange}
-        className="w-full border px-3 py-2 rounded"
-      >
-        <option value="entrante">Entrante</option>
-        <option value="principal">Principal</option>
-        <option value="postre">Postre</option>
-        <option value="bebida">Bebida</option>
-      </select>
-      <input
-        name="imageUrl"
-        type="text"
-        placeholder="URL de imagen (opcional)"
-        value={formData.imageUrl}
-        onChange={handleChange}
-        className="w-full border px-3 py-2 rounded"
-      />
+  <input
+    name="name"
+    type="text"
+    placeholder="Nombre del plato"
+    value={formData.name}
+    onChange={handleChange}
+    required
+    className="form-input"
+  />
+  <textarea
+    name="description"
+    placeholder="Descripción"
+    value={formData.description}
+    onChange={handleChange}
+    className="form-input"
+  />
+  <input
+    name="price"
+    type="number"
+    step="0.01"
+    placeholder="Precio"
+    value={formData.price}
+    onChange={handleChange}
+    required
+    className="form-input"
+  />
+  <select
+    name="category"
+    value={formData.category}
+    onChange={handleChange}
+    className="form-input"
+  >
+    <option value="entrante">Entrante</option>
+    <option value="principal">Principal</option>
+    <option value="postre">Postre</option>
+    <option value="bebida">Bebida</option>
+  </select>
+  <input
+    name="imageUrl"
+    type="text"
+    placeholder="URL de imagen (opcional)"
+    value={formData.imageUrl}
+    onChange={handleChange}
+    className="form-input"
+  />
 
-      <button
-        type="submit"
-        className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700"
-      >
-        {submitLabel}
-      </button>
-    </form>
+  <button type="submit" className="form-button">
+    {submitLabel}
+  </button>
+</form>
+
   );
 }

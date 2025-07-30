@@ -66,33 +66,39 @@ export default function CreateOrderPage() {
   if (!restaurant) return <p>Cargando restaurante...</p>;
 
   return (
-    <div style={{ padding: "2rem" }}>
-      <h2>Pedir en {restaurant.name}</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Número de mesa:</label>
-          <input
-            type="number"
-            value={tableNumber}
-            min={1}
-            onChange={(e) => setTableNumber(parseInt(e.target.value))}
-          />
-        </div>
-
-        {menuItems.map(item => (
-          <div key={item._id}>
-            <strong>{item.name}</strong> - {item.price}€<br />
-            <input
-              type="number"
-              min={0}
-              value={quantities[item._id] || 0}
-              onChange={(e) => handleQuantityChange(item._id, e.target.value)}
-            />
-          </div>
-        ))}
-
-        <button type="submit" style={{ marginTop: '1rem' }}>Realizar Pedido</button>
-      </form>
+      <div className="order-form-container">
+  <h2 className="order-title">Pedir en {restaurant.name}</h2>
+  <form onSubmit={handleSubmit} className="order-form">
+    <div className="order-field">
+      <label htmlFor="tableNumber">Número de mesa:</label>
+      <input
+        id="tableNumber"
+        type="number"
+        value={tableNumber}
+        min={1}
+        onChange={(e) => setTableNumber(parseInt(e.target.value))}
+        className="order-input"
+      />
     </div>
+
+    {menuItems.map((item) => (
+      <div className="order-item" key={item._id}>
+        <strong>{item.name}</strong> - {item.price}€<br />
+        <input
+          type="number"
+          min={0}
+          value={quantities[item._id] || 0}
+          onChange={(e) => handleQuantityChange(item._id, e.target.value)}
+          className="order-input"
+        />
+      </div>
+    ))}
+
+    <button type="submit" className="order-submit-button">
+      Realizar Pedido
+    </button>
+  </form>
+</div>
+
   );
 }

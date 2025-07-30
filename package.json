@@ -1,4 +1,21 @@
-
+{
+  "name": "qr-orders-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "homepage": "https://qr-orders-frontend.onrender.com",
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "main": "postcss.config.js",
+  "type": "commonjs",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ispaluan84/qr-orders-frontend.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Ispaluan84/qr-orders-frontend/issues"
+  },
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -17,24 +34,6 @@
       "last 1 safari version"
     ]
   },
-  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
-  "main": "postcss.config.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Ispaluan84/qr-orders-frontend.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
-  "bugs": {
-    "url": "https://github.com/Ispaluan84/qr-orders-frontend/issues"
-  }
-  {
-  "name": "qr-orders-frontend",
-  "version": "0.1.0",
-  "private": true,
-  "homepage": "https://qr-orders-frontend.onrender.com",
   "dependencies": {
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
@@ -53,4 +52,4 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   }
-  }
+}

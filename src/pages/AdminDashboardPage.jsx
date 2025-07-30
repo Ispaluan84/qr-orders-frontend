@@ -41,35 +41,36 @@ export default function AdminDashboardPage() {
   }
 
   return (
-<div className="min-h-screen bg-gray-50 px-6 py-12">
-      <div className="max-w-3xl mx-auto bg-white p-8 rounded-xl shadow-lg">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">{restaurant.name}</h1>
-        <p className="text-gray-600 mb-8">{restaurant.description}</p>
+    <div className="admin-dashboard">
+  <div className="admin-box">
+    <h1 className="admin-title">{restaurant.name}</h1>
+    <p className="admin-description">{restaurant.description}</p>
 
-        <div className="space-y-4">
-          <button
-            onClick={() => navigate('/admin/menu')}
-            className="w-full bg-blue-600 text-white font-semibold px-4 py-3 rounded-lg hover:bg-blue-700 transition"
-          >
-            Ver / Editar Menú
-          </button>
+    <div className="admin-buttons">
+      <button
+        onClick={() => navigate('/admin/menu')}
+        className="admin-button menu"
+      >
+        Ver / Editar Menú
+      </button>
 
-          <button
-            onClick={() => navigate('/admin/orders')}
-            className="w-full bg-green-600 text-white font-semibold px-4 py-3 rounded-lg hover:bg-green-700 transition"
-          >
-            Ver Pedidos
-          </button>
+      <button
+        onClick={() => navigate('/admin/orders')}
+        className="admin-button orders"
+      >
+        Ver Pedidos
+      </button>
 
-          <button
-            onClick={handleLogout}
-            className="w-full bg-red-600 text-white font-semibold px-4 py-3 rounded-lg hover:bg-red-700 transition"
-          >
-            Cerrar Sesión
-          </button>
-        </div>
-      </div>
+      <button
+        onClick={handleLogout}
+        className="admin-button logout"
+      >
+        Cerrar Sesión
+      </button>
     </div>
+  </div>
+</div>
+
   );
 }
 

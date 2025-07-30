@@ -76,69 +76,68 @@ export default function MenuEditPage() {
   if (loading) return <p className="container">Cargando...</p>;
 
   return (
-    <div className="container">
-      <h2 className="section-title">Editar Plato</h2>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+   <div className="edit-dish-container">
+  <h2 className="edit-dish-title">Editar Plato</h2>
+  {error && <p className="form-error">{error}</p>}
 
-      <form onSubmit={handleSubmit}>
-        <input
-          className="input"
-          name="name"
-          type="text"
-          placeholder="Nombre"
-          value={formData.name}
-          onChange={handleChange}
-          required
-        />
-        <textarea
-          className="input"
-          name="description"
-          placeholder="Descripción"
-          value={formData.description}
-          onChange={handleChange}
-        />
-        <input
-          className="input"
-          name="price"
-          type="number"
-          step="0.01"
-          placeholder="Precio"
-          value={formData.price}
-          onChange={handleChange}
-          required
-        />
-        <select
-          className="input"
-          name="category"
-          value={formData.category}
-          onChange={handleChange}
-        >
-          <option value="entrante">Entrante</option>
-          <option value="principal">Principal</option>
-          <option value="postre">Postre</option>
-          <option value="bebida">Bebida</option>
-        </select>
-        <input
-          className="input"
-          name="imageUrl"
-          type="text"
-          placeholder="URL de imagen (opcional)"
-          value={formData.imageUrl}
-          onChange={handleChange}
-        />
-        <label>
-          <input
-            type="checkbox"
-            name="available"
-            checked={formData.available}
-            onChange={handleChange}
-          />{' '}
-          Disponible
-        </label>
-        <br />
-        <button className="btn" type="submit">Guardar Cambios</button>
-      </form>
-    </div>
+  <form onSubmit={handleSubmit} className="edit-dish-form">
+    <input
+      className="input"
+      name="name"
+      type="text"
+      placeholder="Nombre"
+      value={formData.name}
+      onChange={handleChange}
+      required
+    />
+    <textarea
+      className="input"
+      name="description"
+      placeholder="Descripción"
+      value={formData.description}
+      onChange={handleChange}
+    />
+    <input
+      className="input"
+      name="price"
+      type="number"
+      step="0.01"
+      placeholder="Precio"
+      value={formData.price}
+      onChange={handleChange}
+      required
+    />
+    <select
+      className="input"
+      name="category"
+      value={formData.category}
+      onChange={handleChange}
+    >
+      <option value="entrante">Entrante</option>
+      <option value="principal">Principal</option>
+      <option value="postre">Postre</option>
+      <option value="bebida">Bebida</option>
+    </select>
+    <input
+      className="input"
+      name="imageUrl"
+      type="text"
+      placeholder="URL de imagen (opcional)"
+      value={formData.imageUrl}
+      onChange={handleChange}
+    />
+    <label className="checkbox-label">
+      <input
+        type="checkbox"
+        name="available"
+        checked={formData.available}
+        onChange={handleChange}
+      />{' '}
+      Disponible
+    </label>
+    <button className="btn" type="submit">Guardar Cambios</button>
+  </form>
+</div>
   );
 }
 

@@ -28,9 +28,10 @@ export default function MenuCreatePage() {
   };
 
   return (
-    <div className="max-w-xl mx-auto p-6">
-      <h2 className="text-2xl font-bold mb-4">Nuevo Plato</h2>
-      <MenuForm onSubmit={handleCreate} submitLabel="Crear Plato" />
-    </div>
+    <div className="new-dish-container">
+  <h2 className="new-dish-title">Nuevo Plato</h2>
+  <MenuForm onSubmit={handleCreate} submitLabel="Crear Plato" />
+</div>
+
   );
 }

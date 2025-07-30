@@ -64,61 +64,62 @@ export default function PublicMenuPage() {
 
 
 return (
-  <div className="max-w-2xl mx-auto p-4">
-    <h1 className="text-2xl font-bold mb-4 text-center">Menú</h1>
+  <div className="menu-page-container">
+  <h1 className="menu-page-title">Menú</h1>
 
-    {message && (
-      <div className="mb-4 text-center text-sm text-red-500">{message}</div>
-    )}
-    <form onSubmit={handleSubmit} className="space-y-6">
-      <div>
-        <label className="block font-medium mb-1">Número de mesa:</label>
-        <input
-          type="number"
-          value={tableNumber}
-          onChange={(e) => setTableNumber(e.target.value)}
-          required
-          className="border rounded px-3 py-2 w-full"
-        />
-      </div>
+  {message && (
+    <div className="menu-message">{message}</div>
+  )}
 
-      {Object.keys(groupedMenu).map(category => (
-        <div key={category} className="mb-6">
-          <h2 className="text-xl font-bold mb-2 capitalize">{category}</h2>
-          {groupedMenu[category].map(item => (
-            <div key={item._id} className="border-b pb-2 mb-2">
-              <div className="flex justify-between items-center">
-                <div>
-                  <h3 className="font-semibold text-lg">{item.name}</h3>
-                  <p className="text-gray-700 text-sm">{item.description}</p>
-                  <p className="text-green-600 font-bold">€{item.price}</p>
-                </div>
-                <input
-                  type="number"
-                  min={0}
-                  className="w-20 border rounded px-2 py-1 ml-4"
-                  value={quantities[item._id] || ''}
-                  onChange={(e) => handleQuantityChange(item._id, e.target.value)}/>
+  <form onSubmit={handleSubmit} className="menu-form">
+    <div className="form-group">
+      <label className="form-label">Número de mesa:</label>
+      <input
+        type="number"
+        value={tableNumber}
+        onChange={(e) => setTableNumber(e.target.value)}
+        required
+        className="form-input"
+      />
+    </div>
+
+    {Object.keys(groupedMenu).map((category) => (
+      <div key={category} className="menu-category">
+        <h2 className="category-title">{category}</h2>
+        {groupedMenu[category].map((item) => (
+          <div key={item._id} className="menu-item">
+            <div className="menu-item-content">
+              <div>
+                <h3 className="item-name">{item.name}</h3>
+                <p className="item-description">{item.description}</p>
+                <p className="item-price">€{item.price}</p>
               </div>
+              <input
+                type="number"
+                min={0}
+                className="item-quantity"
+                value={quantities[item._id] || ''}
+                onChange={(e) => handleQuantityChange(item._id, e.target.value)}
+              />
             </div>
-          ))}
-        </div>
-      ))}
+          </div>
+        ))}
+      </div>
+    ))}
 
-      <button
-        type="submit"
-        className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 w-full"
-      >
-        Enviar Pedido
-      </button>
-      {toast.message && (
-        <Toast
-          message={toast.message}
-          type={toast.type}
-          onClose={() => setToast({ message: '', type: '' })}
-        />
-      )}
-    </form>
-  </div>
+    <button type="submit" className="submit-button">
+      Enviar Pedido
+    </button>
+
+    {toast.message && (
+      <Toast
+        message={toast.message}
+        type={toast.type}
+        onClose={() => setToast({ message: '', type: '' })}
+      />
+    )}
+  </form>
+</div>
+
 );
 }
